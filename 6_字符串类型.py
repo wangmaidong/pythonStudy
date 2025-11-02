@@ -132,18 +132,36 @@
 
 # 分割和连接
 
-csv_data = "apple,banana,orange,grape"
-sentence = "Hello World of Python"
-lines = "第一行\n第二行\n第三行"
+# csv_data = "apple,banana,orange,grape"
+# sentence = "Hello World of Python"
+# lines = "第一行\n第二行\n第三行"
+#
+# print("分割操作")
+# print(f"CVS分割：{csv_data.split(',')}")
+# print(f"句子分割：{sentence.split()}")
+# print(f"限制分割：{sentence.split(' ', 2)}")
+# print(f"从右限制分割：{sentence.rsplit(' ', 2)}")
 
-print("分割操作")
-print(f"CVS分割：{csv_data.split(',')}")
-print(f"句子分割：{sentence.split()}")
-print(f"限制分割：{sentence.split(' ', 2)}")
-print(f"从右限制分割：{sentence.rsplit(' ', 2)}")
-
-print(f"行分割：{lines.splitlines()}")
+# print(f"行分割：{lines.splitlines()}")
 # 连接字符串
-fruits = ["apple", "banana", "orange"]
-print(f"连接：{'--'.join(fruits)}")
-print(f"连接：{','.join(fruits)}")
+# fruits = ["apple", "banana", "orange"]
+# print(f"连接：{'--'.join(fruits)}")
+# print(f"连接：{','.join(fruits)}")
+
+# 字符串编码
+text = "Hello 世界 🐍"
+
+print(f"原始字符串：{text}")
+
+# 编码为字节
+utf8_bytes = text.encode("utf-8")
+gbk_bytes = text.encode("gbk", errors="ignore")
+
+print(f"UTF-8字节：{utf8_bytes}")
+print(f"GBk字节： {gbk_bytes}")
+
+decode_utf8 = utf8_bytes.decode("utf-8")
+decode_gbk = gbk_bytes.decode("gbk")
+
+print(f"UTF8解码：{decode_utf8}")
+print(f"GBK解码：{decode_gbk}")

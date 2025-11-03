@@ -76,31 +76,86 @@
 
 # 集合的数学运算
 
-set1 = {1, 2, 3, 4}
-set2 = {3, 4, 5, 6}
+# set1 = {1, 2, 3, 4}
+# set2 = {3, 4, 5, 6}
+#
+# union1 = set1.union(set2)
+# union2 = set1 | set2
+# print(union1)
+# print(union2)
+#
+# set3 = {4, 7, 8, 1}
+# big_union = set1.union(set2, set3)
+# print(big_union)
+#
+# intersection1 = set1.intersection(set2)
+# print(intersection1)
+# intersection2 = set1 & set2
+# print(intersection2)
+# intersection3 = set1 & set3
+# print(intersection3)
+#
+# difference1 = set1.difference(set2)
+# difference2 = set1 - set2
+# print(difference1)
+# print(difference2)
+#
+# sym_diff1 = set1.symmetric_difference(set2)
+# sym_diff2 = set1 ^ set2
+# print(sym_diff1)
+# print(sym_diff2)
 
-union1 = set1.union(set2)
-union2 = set1 | set2
-print(union1)
-print(union2)
+# # 子集与超集
+#
+# A = {1, 2, 3}
+# B = {1, 2, 3, 4, 5, 6}
+# C = {1, 2}
+# # 子集判断
+# print(C.issubset(A))
+# print(A.issubset(B))
+# print(C <= B)
+# # 真子集
+# print(C < B)
+# print(A < B)
+# print(A < C)
+# # 超集
+#
+# print(B.issuperset(A))
+# print(A.issuperset(C))
+# print(B >= A)
+# print(A >= C)
+#
+# set1 = {1, 2, 3}
+# set2 = {4, 5, 6}
+# set3 = {3, 4, 5}
+#
+# print(set1.isdisjoint(set2))
+# print(set2.isdisjoint(set3))
 
-set3 = {4, 7, 8, 1}
-big_union = set1.union(set2, set3)
-print(big_union)
 
-intersection1 = set1.intersection(set2)
-print(intersection1)
-intersection2 = set1 & set2
-print(intersection2)
-intersection3 = set1 & set3
-print(intersection3)
+# 不可变集合
 
-difference1 = set1.difference(set2)
-difference2 = set1 - set2
-print(difference1)
-print(difference2)
+# frozen_set = frozenset([1, 2, 3, 4, 3, 2])-
+# print(f"不可变集合 {frozen_set}, 类型：{type(frozen_set)}")
+#
+# print(len(frozen_set))
+# print(1 in frozen_set)
+# print(frozen_set | {4, 6, 8})
 
-sym_diff1 = set1.symmetric_difference(set2)
-sym_diff2 = set1 ^ set2
-print(sym_diff1)
-print(sym_diff2)
+# 成员测试
+import time
+
+large_list = list(range(1000000))
+large_set = set(range(1000000))
+
+start_time = time.time()
+result1 = 999999 in large_list
+list_time = time.time() - start_time
+
+start_time = time.time()
+result2 = 999999 in large_set
+set_time = time.time() - start_time
+
+print(f"列表查询时间： {list_time}")
+print(f"集合查询时间：{set_time}")
+print(f"集合比列表快：{list_time // set_time} 倍")

@@ -7,6 +7,8 @@
 #
 # print(greet.__doc__)
 # greet("王磊")
+from idlelib.pyshell import restart_line
+from logging import setLogRecordFactory
 
 
 # 参数类型详解
@@ -176,49 +178,220 @@
 
 # 变量作用域
 # LEGB 原则  本地作用域  嵌套函数作用域  全局作用域  内置作用域
-name = "全局变量"
+# name = "全局变量"
+#
+#
+# def outer():
+#     name = "外部函数变量"
+#
+#     def inner():
+#         name = "内部函数变量"
+#         print(name)
+#
+#     inner()
+#     print(name)
+#
+#
+# outer()
+# print(name)
+#
+# # global 关键字
+# counter = 0
+#
+#
+# def increment():
+#     global counter
+#     counter += 1
+#
+#
+# increment()
+# increment()
+# print(counter)
+#
+# # nonlocal关键字
+#
+#
+# def outer():
+#     x = "local"
+#
+#     def inner():
+#         nonlocal x
+#         x = "nonlocal"
+#         print("inner", x)
+#
+#     inner()
+#     print("outer", x)
+#
+#
+# outer()
 
 
-def outer():
-    name = "外部函数变量"
-
-    def inner():
-        name = "内部函数变量"
-        print(name)
-
-    inner()
-    print(name)
-
-
-outer()
-print(name)
-
-# global 关键字
-counter = 0
-
-
-def increment():
-    global counter
-    counter += 1
-
-
-increment()
-increment()
-print(counter)
-
-# nonlocal关键字
+# 函数的高级特性
+# 函数作为参数
+# def apply_operation(numbers, operation):
+#     """对数字列表应用操作"""
+#     return [operation(n) for n in numbers]
+#
+#
+# def square(x):
+#     return x**2
+#
+#
+# def double(x):
+#     return x * 2
+#
+#
+# numbers = [1, 2, 3, 4, 5]
+# res1 = apply_operation(numbers, square)
+# res2 = apply_operation(numbers, double)
+# print(f"res1:{res1}")
+# print(f"res2:{res2}")
 
 
-def outer():
-    x = "local"
+# 嵌套函数
+# def greet(name):
+#     def format_message():
+#         return f"hello {name}"
+#
+#     return format_message()
+#
+#
+# print(greet("王磊"))
 
-    def inner():
-        nonlocal x
-        x = "nonlocal"
-        print("inner", x)
 
-    inner()
-    print("outer", x)
+# 闭包
+# def make_multiplier(factor):
+#     def multiplier(x):
+#         return x * factor
+#
+#     return multiplier
+#
+#
+# double = make_multiplier(2)
+# triple = make_multiplier(3)
+#
+# print(double(5))
+# print(triple(5))
 
 
-outer()
+# 装饰器
+# def my_decorator(func):
+#     def wrapper():
+#         print("函数执行前")
+#         func()
+#         print("函数执行后")
+#
+#     return wrapper
+#
+#
+# @my_decorator
+# def say_hello():
+#     print("Hello")
+#
+#
+# say_hello()
+
+
+# 带参数的装饰器
+# def logger(func):
+#     def wrapper(*args, **kwargs):
+#         print(f"调用函数 {func.__name__}, 参数： {args} {kwargs}")
+#         return func(*args, **kwargs)
+#
+#     return wrapper
+#
+#
+# @logger
+# def add(x, y, **kwargs):
+#     return x + y
+#
+#
+# print(add(3, 5, a=1, b=2))
+
+# 匿名函数
+
+# square = lambda x: x**2
+# print(square(5))
+#
+# students = [
+#     {"name": "Alice", "grade": 85},
+#     {"name": "Bob", "grade": 92},
+#     {"name": "Charlie", "grade": 78},
+# ]
+#
+# sorted_students = sorted(students, key=lambda x: x["grade"])
+# print(sorted_students)
+
+# numbers = [1, 2, 3, 4, 5]
+# squared = list(map(lambda x: x**2, numbers))
+# print(squared)
+#
+# even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+# print(even_numbers)
+
+
+# def factorial(n):
+#     if n == 0 or n == 1:
+#         return 1
+#     else:
+#         return n * factorial(n - 1)
+#
+#
+# print(factorial(5))
+#
+#
+# def fibonacci(n):
+#     if n <= 1:
+#         return n
+#     else:
+#         return fibonacci(n - 2) + fibonacci(n - 1)
+#
+#
+# for i in range(10):
+#     print(fibonacci(i), end=" ")
+
+
+# def safe_divide(a, b):
+#     try:
+#         result = a / b
+#     except ZeroDivisionError:
+#         return "错误：除数不能为零"
+#     except TypeError:
+#         return "错误：参数类型不正确"
+#     else:
+#         return result
+#
+#
+# print(safe_divide(10, 2))
+# print(safe_divide(10, 0))
+# print(safe_divide(10, "sd"))
+
+
+# 实际函数示例
+# 数据处理
+# def analyze_numbers(numbers):
+#     if not numbers:
+#         return None
+#     analysis = {
+#         "count": len(numbers),
+#         "sum": sum(numbers),
+#         "mean": sum(numbers) / len(numbers),
+#         "max": max(numbers),
+#         "min": min(numbers),
+#     }
+#     return analysis
+#
+#
+# data = [10, 20, 30, 40, 50]
+# result = analyze_numbers(data)
+# print(result)
+
+
+def read_file_safely(filename):
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            return file.read()
+    except FileExistsError:
+        return f"错误：文件{filename} 不存在"
+    except Exception as e:
+        return f"读取文件时出错：{str(e)}"

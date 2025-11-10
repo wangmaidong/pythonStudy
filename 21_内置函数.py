@@ -266,3 +266,7 @@ raw_data = [1, 2, None, 3, -1, 4, 0, 5]
 processed, stats = process_data(raw_data)
 print(f"处理后的数据: {processed}")
 print(f"统计信息: {stats}")
+
+result = 0 and True
+print(result)
+print()

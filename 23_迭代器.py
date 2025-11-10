@@ -426,43 +426,94 @@
 
 # 实际应用场景
 # 数据库查询结果处理
-class DatabaseQueryIterator:
-    def __init__(self, query, chunk_size=1000):
-        self.query = query
-        self.chunk_size = chunk_size
-        self.current_chunk = []
-        self.current_index = 0
-        self.has_more = True
+# class DatabaseQueryIterator:
+#     def __init__(self, query, chunk_size=1000):
+#         self.query = query
+#         self.chunk_size = chunk_size
+#         self.current_chunk = []
+#         self.current_index = 0
+#         self.has_more = True
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.current_index >= len(self.current_chunk):
+#             if not self.has_more:
+#                 raise StopIteration
+#             self._fetch_next_chunk()
+#         if not self.current_chunk:
+#             raise StopIteration
+#
+#         value = self.current_chunk[self.current_index]
+#         self.current_index += 1
+#         return value
+#
+#     def _fetch_next_chunk(self):
+#         import random
+#
+#         if random.random() < 0.2:
+#             self.has_more = False
+#             self.current_chunk = []
+#         else:
+#             self.current_chunk = [f"record_{i}" for i in range(self.chunk_size)]
+#         self.current_index = 0
+#
+#
+# query_iter = DatabaseQueryIterator("SELECT * FROM large_table")
+# for i, record in enumerate(query_iter):
+#     if i >= 5000:
+#         break
+#     if i % 1000 == 0:
+#         print(f"处理第{i}条数据")
+
+
+# 流式数据处理
+class StreamProcessor:
+    """流式数据处理"""
+
+    def __init__(self, data_stream):
+        self.data_stream = data_stream
 
     def __iter__(self):
         return self
 
-    def __next__(self):
-        if self.current_index >= len(self.current_chunk):
-            if not self.has_more:
-                raise StopIteration
-            self._fetch_next_chunk()
-        if not self.current_chunk:
-            raise StopIteration
+    def filter_valid(self):
+        # 过滤有效数据
+        return filter(lambda x: x is not None and x != "", self.data_stream)
 
-        value = self.current_chunk[self.current_index]
-        self.current_index += 1
-        return value
+    def transform_data(self):
+        # 转换数据
+        return map(str.upper, self.filter_valid())
 
-    def _fetch_next_chunk(self):
-        import random
+    def batch_process(self, batch_size=1000):
+        batch = []
+        transform_data = self.transform_data()
+        for item in transform_data:
+            batch.append(item)
+            if len(batch) >= batch_size:
+                yield batch
+                batch = []
+        if batch:
+            yield batch
 
-        if random.random() < 0.2:
-            self.has_more = False
-            self.current_chunk = []
-        else:
-            self.current_chunk = [f"record_{i}" for i in range(self.chunk_size)]
-        self.current_index = 0
+    def process(self):
+        # 处理流水线
+        total_processed = 0
+        for batch in self.batch_process(3):
+            total_processed += len(batch)
+            print(f"处理批次：{batch}")
+        print(f"总共处理：{total_processed} 条记录")
 
 
-query_iter = DatabaseQueryIterator("SELECT * FROM large_table")
-for i, record in enumerate(query_iter):
-    if i >= 5000:
-        break
-    if i % 1000 == 0:
-        print(f"处理第{i}条数据")
+def data_stream():
+    data = ["hello", "", "world", None, "python", "stream", "", "processing"]
+    for item in data:
+        yield item
+
+
+processor = StreamProcessor(data_stream())
+processor.process()
+
+# 最佳实践
+# 使用迭代器处理大数据集

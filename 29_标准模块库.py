@@ -123,41 +123,118 @@ from datetime import datetime, date, time, timedelta
 
 # collections 高级数据结构
 # counter 计数器
-from collections import Counter
+# from collections import Counter
+#
+# words = ["apple", "banana", "apple", "orange", "banana", "apple"]
+# word_count = Counter(words)
+# print(f"词频统计：{word_count}")
+# print(f"出现最多的两个：{word_count.most_common(2)}")
+#
+# # 更新计数器
+# word_count.update(["apple", "orange"])
+# print(f"更新后的计数器：{word_count}")
+#
+#
+# # defaultdict 默认字典
+#
+# from collections import defaultdict
+#
+# dd = defaultdict(list)
+# dd["fruits"].append("apple")
+# dd["fruits"].append("banana")
+# dd["vegetables"].append("carrot")
+# print(f"默认字典：{dict(dd)}")
+#
+#
+# # 自定义默认值函数
+# def default_value():
+#     return "未知"
+#
+#
+# dd2 = defaultdict(default_value)
+# print(f"键值不存在时的值：{dd2['nonexistent']}")
+# # 有序字典
+# from collections import OrderedDict
+#
+# od = OrderedDict()
+# od["z"] = 1
+# od["a"] = 2
+# od["c"] = 3
+# print(f"有序字典:{od}")
+#
+# # namedtuple 命名元组
+# from collections import namedtuple
+# Point = namedtuple("Point", ["x", "y"])
+# p = Point(10, 20)
+# print("点坐标",p)
+# print(f"x坐标：{p.x}")
+# print(f"y坐标：{p.y}")
+# # 双端队列
+# from collections import deque
+# dq = deque([1,2,3])
+# dq.append(4)
+# dq.appendleft(0)
+# print(f"双端队列：{dq}")
+# print(f"右端弹出：{dq.pop()}")
+# print(f"左端弹出：{dq.popleft()}")
 
-words = ["apple", "banana", "apple", "orange", "banana", "apple"]
-word_count = Counter(words)
-print(f"词频统计：{word_count}")
-print(f"出现最多的两个：{word_count.most_common(2)}")
+# 正则表达式
+# import re
+#
+# text = "小王的邮箱是: kwang@mail.com, 电话: 188-1234-5678。还有一个邮箱：abc_xyz@company.org, 另外电话: 139-8765-4321。"
+#
+# # 1. match：只检查是否从开头匹配
+# result = re.match(r'小王的邮箱是', text)
+# if result:
+#     print("match - 匹配到字符串开头:", result.group())
+#
+# # 2. search：查找第一个邮箱
+# email = re.search(r'\w+@\w+\.\w+', text)
+# if email:
+#     print("search - 第一个邮箱:", email.group())
+#
+# # 3. findall：查找所有电话号码
+# phones = re.findall(r'\d{3}-\d{4}-\d{4}', text)
+# print("findall - 所有电话:", phones)
+#
+# # 4. finditer：遍历所有邮箱并打印位置信息
+# print("finditer - 所有邮箱位置和内容:")
+# for match in re.finditer(r'\w+@\w+\.\w+', text):
+#     print(f"邮箱: {match.group()}，起始: {match.start()}，结束: {match.end()}")
+#
+# # 5. split：按中文全角逗号和冒号分割
+# fragments = re.split(r'[：:，,]', text)
+# print("split - 分割结果:", fragments)
+#
+# # 6. compile：预编译正则以提高多次匹配效率
+# pattern = re.compile(r'\w+@\w+\.\w+')
+# emails = pattern.findall(text)
+# print("compile - 所有邮箱:", emails)
+#
+# # 7. 分组匹配
+# m = re.match(r'(\w+)的邮箱是: (\w+@\w+\.\w+)', text)
+# if m:
+#     print("match.group(0):", m.group(0))  # 整体
+#     print("match.group(1):", m.group(1))  # "小王"
+#     print("match.group(2):", m.group(2))  # 邮箱
+#
+# # 8. sub：替换所有数字为*
+# anonymized = re.sub(r'\d', '*', text)
+# print("sub - 隐私处理后:", anonymized)
 
-# 更新计数器
-word_count.update(["apple", "orange"])
-print(f"更新后的计数器：{word_count}")
+# random 随机数生成
+import random
+print(f"0-1随机浮点数：{random.random()}")
+print(f"1-10随机整数：{random.randint(1,10)}")
+print(f"1-100随机偶数：{random.randrange(0,101,2)}")
+print(f"5.0-10.0随机浮点数：{random.uniform(5.0, 10.0)}")
 
+# 序列操作
+items = ['apple', 'banana', 'cherry', 'date']
+print(f"随机选择：{random.choice(items)}")
+print(f"随机选择多个：{random.choices(items, k=3)}")
+print(f"随机抽样：{random.sample(items,2)}")
 
-# defaultdict 默认字典
-
-from collections import defaultdict
-
-dd = defaultdict(list)
-dd["fruits"].append("apple")
-dd["fruits"].append("banana")
-dd["vegetables"].append("carrot")
-print(f"默认字典：{dict(dd)}")
-
-
-# 自定义默认值函数
-def default_value():
-    return "未知"
-
-
-dd2 = defaultdict(default_value)
-print(f"键值不存在时的值：{dd2['nonexistent']}")
-# 有序字典
-from collections import OrderedDict
-
-od = OrderedDict()
-od["z"] = 1
-od["a"] = 2
-od["c"] = 3
-print(f"有序字典:{od}")
+# 打乱顺序
+random.shuffle(items)
+print(f"打乱顺序：{items}")

@@ -224,17 +224,271 @@ from datetime import datetime, date, time, timedelta
 
 # random 随机数生成
 import random
-print(f"0-1随机浮点数：{random.random()}")
-print(f"1-10随机整数：{random.randint(1,10)}")
-print(f"1-100随机偶数：{random.randrange(0,101,2)}")
-print(f"5.0-10.0随机浮点数：{random.uniform(5.0, 10.0)}")
+
+# print(f"0-1随机浮点数：{random.random()}")
+# print(f"1-10随机整数：{random.randint(1,10)}")
+# print(f"1-100随机偶数：{random.randrange(0,101,2)}")
+# print(f"5.0-10.0随机浮点数：{random.uniform(5.0, 10.0)}")
 
 # 序列操作
-items = ['apple', 'banana', 'cherry', 'date']
-print(f"随机选择：{random.choice(items)}")
-print(f"随机选择多个：{random.choices(items, k=3)}")
-print(f"随机抽样：{random.sample(items,2)}")
+# items = ['apple', 'banana', 'cherry', 'date']
+# print(f"随机选择：{random.choice(items)}")
+# print(f"随机选择多个：{random.choices(items, k=3)}")
+# print(f"随机抽样：{random.sample(items,2)}")
 
 # 打乱顺序
-random.shuffle(items)
-print(f"打乱顺序：{items}")
+# random.shuffle(items)
+# print(f"打乱顺序：{items}")
+# 特殊分布
+# print(f"正态分布随机数：{random.gauss(0,1)}")
+# random.seed(42)
+# print(f"固定种子结果1：{random.randint(1,100)}")
+# print(f"固定种子结果2：{random.randint(1,100)}")
+
+
+# 实用函数
+# def generate_verification_code(length=6):
+#     characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#     return "--".join(random.choices(characters, k=length))
+#
+#
+# print(f"验证码：{generate_verification_code()}")
+
+# 数学运算
+
+import math
+
+# print(f"π的值:{math.pi}")
+# print(f"e的值：{math.e}")
+#
+# # 基础数学函数
+# print(f"平方根：{math.sqrt(16)}")
+# print(f"绝对值：{math.fabs(-123)}")
+# print(f"2的3次方：{math.pow(2,3)}")
+# print(f"e的2次方：{math.exp(2)}")
+# print(f"自然对数：{math.log(10)}")
+# print(f"以十为底的对数：{math.log10(100)}")
+#
+# # 三角函数
+# angle_rad = math.radians(45)
+# print(f"45度的正弦值：{math.sin(45)}")
+# print(f"45度的余弦值：{math.cos(45)}")
+# print(f"45度的正切值：{math.tan(45)}")
+# # 反三角函数
+# print(f"反三角函数：{math.asin(0.5)}")
+#
+# # 取整运算
+# print(f"向上取整：{math.ceil(3.2)}")
+# print(f"向下取整：{math.floor(5.6)}")
+# print(f"四舍五入：{round(3.5)}")
+# print(f"截断小数：{math.trunc(3.996654)}")
+#
+# # 排列组合
+# print(f"5的阶乘：{math.factorial(5)}")
+# print(f"组合数C(5,2):{math.comb(5,2)}")
+# print(f"排列数P(5,2):{math.perm(5,2)}")
+#
+# # 距离和统计
+# point1 = (1, 2)
+# point2 = (2, 3)
+# distance = math.dist(point1, point2)
+# print(f"两点距离：{distance}")
+
+# 高效迭代器
+
+import itertools
+
+# counter = itertools.count(10)
+# print("从10开始的计数")
+# for i in range(3):
+#     print(next(counter))
+#
+#
+# cycler = itertools.cycle("ABC")
+# print("循环重复：")
+# for i in range(5):
+#     print(next(cycler))
+#
+# repeater = itertools.repeat("hello", 3)
+# print("重复元素", list(repeater))
+# # 有限迭代器
+# print(f"累计和：{list(itertools.accumulate([1,2,3,4,5]))}")
+# print(f"链式链接：{list(itertools.chain('abc', 'def'))}")
+# # 分组
+# data = ["A", "A", "B", "C", "C", "C"]
+#
+# print("分组：")
+# print(itertools.groupby(data))
+# for key, group in itertools.groupby(data):
+#     print(f"{key}: {list(group)}")
+#
+# # 组合数学
+# # 排列
+# print("排列", list(itertools.permutations("ABC", 2)))
+# print(f"组合：{list(itertools.combinations('ABC',2))}")
+# print(f"带重复的组合：{list(itertools.combinations_with_replacement('ABC', 2))}")
+# # 并行迭代
+# names = ["Alice", "Bob", "Charlie", "张三"]
+# ages = [25, 30, 35]
+# for name, age in itertools.zip_longest(names, ages, fillvalue="未知"):
+#     print(f"{name}:{age}")
+
+# 高阶函数工具
+
+# import functools
+#
+#
+# def multiply(x, y):
+#     return x * y
+#
+#
+# double = functools.partial(multiply, 2)
+# triple = functools.partial(multiply, 3)
+# print(f"5的2倍是：{double(5)}")
+# print(f"5的3倍是：{triple(5)}")
+#
+#
+# @functools.lru_cache(maxsize=128)
+# def fibonacci(n):
+#     if n < 2:
+#         return n
+#     return fibonacci(n - 1) + fibonacci(n - 2)
+#
+#
+# print("斐波那契数列")
+#
+# for i in range(10):
+#     print(f"F({i} = {fibonacci(i)})")
+#
+# print("缓存信息", fibonacci.cache_info())
+# # 累计运算
+# numbers = [1, 2, 3, 4, 5, 6]
+# product = functools.reduce(lambda x, y: x * y, numbers)
+# print("列表乘积", product)
+#
+#
+# # 自动比较
+# @functools.total_ordering
+# class Student:
+#     def __init__(self, name, score):
+#         self.name = name
+#         self.score = score
+#
+#     def __eq__(self, other):
+#         return self.score == other.score
+#
+#     def __lt__(self, other):
+#         return self.score < other.score
+#
+#     def __repr__(self):
+#         return f"Student({self.name}, {self.score})"
+#
+#
+# students = [Student("Alice", 85), Student("Bob", 92), Student("Charlie", 78)]
+# print(students)
+# sorted_students = sorted(students)
+# print("按成绩排序", sorted_students)
+#
+#
+# # 装饰器包装
+# def my_decorator(func):
+#     @functools.wraps(func)
+#     def wrapper(*args, **kargs):
+#         print(f"调用函数：{func.__name__}")
+#         return func(*args, **kargs)
+#
+#     return wrapper
+#
+#
+# @my_decorator
+# def say_hello(name):
+#     """打招呼函数"""
+#     return f"hello,{name}"
+#
+#
+# print(say_hello("world"))
+# print("函数名", say_hello.__name__)
+# print("函数文档", say_hello.__doc__)
+
+# 类型注解
+# 基本类型注解
+from typing import List, Dict, Tuple, Optional, Union, Any, Callable, TypeVar, Generic
+
+
+# 基本类型注解
+def greet(name: str) -> str:
+    return f"hello,{name}"
+
+
+# 容器类型注解
+def process_scores(scores: List[int]) -> Dict[str, float]:
+    return {"average": sum(scores) / len(scores)}
+
+
+# 可选类型
+def find_user(user_id: int) -> Optional[Dict[str, Any]]:
+    if user_id == 1:
+        return {"name": "Alice", "age": 25}
+    return None
+
+
+# 联合
+def process_data(data: Union[str, int, List]) -> str:
+    return str(data)
+
+
+# 函数类型注解
+MathFunction = Callable[[float, float], float]
+
+
+def calculator(a: float, b: float, operation: MathFunction) -> float:
+    return operation(a, b)
+
+
+res = calculator(1, 2, lambda x, y: x * y)
+
+# 泛型类型
+T = TypeVar("T")
+
+
+class Stack(Generic[T]):
+    def __init__(self):
+        self.items: List[T] = []
+
+    def push(self, item: T) -> None:
+        self.items.append(item)
+
+    def pop(self) -> T:
+        return self.items.pop()
+
+
+int_stack = Stack[int]()
+int_stack.push(2)
+int_stack.push(1)
+
+# 类型别名
+Vector = List[float]
+Matrix = List[Vector]
+
+
+def multiply_matrix(a: Matrix, b: Vector) -> Matrix:
+    pass
+
+
+# 复杂类型注解
+def validate_user_data(user_data: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    errors = []
+
+    if "name" not in user_data or not user_data["name"]:
+        errors.append("姓名不能为空")
+
+    if "age" not in user_data or not isinstance(user_data["age"], int):
+        errors.append("年龄必须是整数")
+
+    return len(errors) == 0, errors
+
+
+# 使用示例
+user_data = {"name": "Alice", "age": 25}
+is_valid, error_list = validate_user_data(user_data)
+print(f"数据有效: {is_valid}, 错误: {error_list}")

@@ -227,52 +227,168 @@ import math
 
 
 # 综合示例
-class Vector:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#         return f"Vector({self.x},{self.y})"
+#
+#     def __repr__(self):
+#         return f"Vector({self.x},{self.y})"
+#
+#     def __add__(self, other):
+#         return Vector(self.x + other.x, self.y + other.y)
+#
+#     def __sub__(self, other):
+#         return Vector(self.x - other.x, self.y - other.y)
+#
+#     def __mul__(self, scalar):
+#         return Vector(self.x * scalar, self.y * scalar)
+#
+#     def __eq__(self, other):
+#         return self.x == other.x and self.y == other.y
+#
+#     def magnitude(self):
+#         return (self.x**2 + self.y**2) ** 0.5
+#
+#     def __lt__(self, other):
+#         return self.magnitude() < other.magnitude()
+#
+#     def __len__(self):
+#         return 2
+#
+#     def __getitem__(self, index):
+#         if index == 0:
+#             return self.x
+#         if index == 1:
+#             return self.y
+#         else:
+#             raise IndexError("Vector index out of range")
+#
+#
+# v1 = Vector(2, 3)
+# v2 = Vector(4, 5)
+# print(v1)
+# print(v1 + v2)
+# print(v1 * 3)
+# print(v1 == Vector(2, 3))
+# print(v1[0])
+# print(v1.magnitude())
 
-    def __str__(self):
-        return f"Vector({self.x},{self.y})"
+# 抽象基类
+# from abc import ABC, abstractmethod
+# import math
+#
+# class Shape(ABC):
+#     """形状抽象基类"""
+#     @abstractmethod
+#     def area(self):
+#         pass
+#     @abstractmethod
+#     def perimeter(self):
+#         pass
+#     # 具体方法
+#     def description(self):
+#         return f"This is a {self.__class__.__name__}"
+#
+# class Circle(Shape):
+#     def __init__(self, radius):
+#         self.radius = radius
+#     def area(self):
+#         return 3.14 * self.radius ** 2
+#     def perimeter(self):
+#         return 3.14 * 2 * self.radius
+#
+# class Square(Shape):
+#     def __init__(self, x ,y):
+#         self.x = x
+#         self.y = y
+#     def area(self):
+#         return self.x * self.y
+#     def perimeter(self):
+#         return (self.x + self.y) * 2
+#
+# circle = Circle(4)
+# square = Square(3,7)
+# print(circle.area())
+# print(square.area())
+# print(circle.description())
 
-    def __repr__(self):
-        return f"Vector({self.x},{self.y})"
+# 静态类和方法
+# 类方法
+# class MyClass:
+#     count = 0
+#     @classmethod
+#     def increment_count(cls):
+#         cls.count +=1
+#
+# print(MyClass.count)
+# MyClass.increment_count()
+# print(MyClass.count)
+#
+# class MathUtils:
+#     @staticmethod
+#     def add(a,b):
+#         return a + b
+#
+# print(MathUtils.add(3,4))
 
-    def __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y)
+# class Student:
+#     school_name = "Python University"
+#     students_count = 0
+#
+#     def __init__(self,name,grade):
+#         self.name = name
+#         self.grade = grade
+#         Student.students_count += 1
+#
+#     def get_info(self):
+#         return f"{self.name} - Grade {self.grade}"
+#     @classmethod
+#     def get_school_name(cls):
+#         return f"School: {cls.school_name}, Students: {cls.students_count}"
+#     @classmethod
+#     def create_from_string(cls,student_str):
+#         name,grade = student_str.split(',')
+#         return cls(name.strip(), int(grade.strip()))
+#     @staticmethod
+#     def is_passing_garde(grade):
+#         return grade >= 60
+#     @staticmethod
+#     def calculate_average(grades):
+#         average =  sum(grades) / len(grades) if grades else 0
+#         return round(average, 3)
+#
+#
+# student1 = Student("Alice", 85)
+# student2 = Student("Bob", 98)
+# print(student1.get_info())
+# print(student2.get_info())
+# student3 = Student.create_from_string("Jerry,88")
+# print(student3.get_info())
+#
+# print(Student.is_passing_garde(78))
+# print(Student.calculate_average([78, 90, 86]))
 
-    def __sub__(self, other):
-        return Vector(self.x - other.x, self.y - other.y)
+# with 执行下上文
+class FileOpen:
+    def __init__(self, filepath, mode, encoding="utf-8"):
+        self.filepath = filepath
+        self.mode = mode
+        self.encoding = encoding
+    def __enter__(self):
+        print("打开文件")
+        self.file = open(self.filepath, self.mode, encoding=self.encoding)
+        return self.file
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print("关闭文件")
+        if self.file:
+            self.file.close()
 
-    def __mul__(self, scalar):
-        return Vector(self.x * scalar, self.y * scalar)
-
-    def __eq__(self, other):
-        return self.x == other.x and self.y == other.y
-
-    def magnitude(self):
-        return (self.x**2 + self.y**2) ** 0.5
-
-    def __lt__(self, other):
-        return self.magnitude() < other.magnitude()
-
-    def __len__(self):
-        return 2
-
-    def __getitem__(self, index):
-        if index == 0:
-            return self.x
-        if index == 1:
-            return self.y
-        else:
-            raise IndexError("Vector index out of range")
+with FileOpen("example.txt", "r") as f:
+    f.read()
 
 
-v1 = Vector(2, 3)
-v2 = Vector(4, 5)
-print(v1)
-print(v1 + v2)
-print(v1 * 3)
-print(v1 == Vector(2, 3))
-print(v1[0])
-print(v1.magnitude())
+
